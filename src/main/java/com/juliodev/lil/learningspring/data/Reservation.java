@@ -10,41 +10,39 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO )
     @Column(name="RESERVATION_ID")
-    private long id;
+    private long reservationId;
 
-    @OneToOne
-    @JoinColumn(name="ROOM_ID", referencedColumnName = "ROOM_ID")
-    private Room room;
+    @Column(name="ROOM_ID")
+    private long roomId;
 
-    @OneToOne
-    @JoinColumn(name="GUEST_ID", referencedColumnName = "GUEST_ID")
-    private Guest guest;
+    @Column(name="GUEST_ID")
+    private long guestId;
 
     @Column(name="RES_DATE")
     private Date reservationDate;
 
-    public long getId() {
-        return id;
+    public long getReservationId() {
+        return reservationId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setReservationId(long reservationId) {
+        this.reservationId = reservationId;
     }
 
-    public Room getRoom() {
-        return room;
+    public long getRoomId() {
+        return roomId;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setRoomId(long roomId) {
+        this.roomId = roomId;
     }
 
-    public Guest getGuest() {
-        return guest;
+    public long getGuestId() {
+        return guestId;
     }
 
-    public void setGuest(Guest guest) {
-        this.guest = guest;
+    public void setGuestId(long guestId) {
+        this.guestId = guestId;
     }
 
     public Date getReservationDate() {
@@ -58,10 +56,10 @@ public class Reservation {
     @Override
     public String toString() {
         return "Reservation{" +
-                "id=" + id +
-                ", room=" + room +
-                ", guest=" + guest +
-                ", resDate=" + reservationDate +
+                "id=" + reservationId +
+                ", roomId=" + roomId +
+                ", guestId=" + guestId +
+                ", reservationDate=" + reservationDate +
                 '}';
     }
 }

@@ -1,8 +1,6 @@
 package com.juliodev.lil.learningspring.util;
 
-import com.juliodev.lil.learningspring.data.Reservation;
-import com.juliodev.lil.learningspring.data.ReservationRepository;
-import com.juliodev.lil.learningspring.data.RoomRepository;
+import com.juliodev.lil.learningspring.data.*;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -14,18 +12,25 @@ import java.util.Date;
 @Component
 public class AppStartupEvent implements ApplicationListener<ApplicationReadyEvent> {
 
+    private final RoomRepository roomRepository;
+    private final GuestRepository guestRepository;
     private final ReservationRepository reservationRepository;
 
-    public AppStartupEvent(ReservationRepository reservationRepository) {
+    public AppStartupEvent(RoomRepository roomRepository,
+                           GuestRepository guestRepository,
+                           ReservationRepository reservationRepository) {
+        this.roomRepository = roomRepository;
+        this.guestRepository = guestRepository;
         this.reservationRepository = reservationRepository;
     }
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-        LocalDate date = LocalDate.parse("2022-01-01");
-        Date dateForFind = Date.from(date.atStartOfDay(defaultZoneId).toInstant());
-        Iterable<Reservation> findReservationByDate = this.reservationRepository.findAllByReservationDate(dateForFind);
-        findReservationByDate.forEach(System.out::println);
+        Iterable<Room> rooms = this.roomRepository.findAll();
+        rooms.forEach(System.out::println);
+        Iterable<Guest> guests = this.guestRepository.findAll();
+        guests.forEach(System.out::println);
+        Iterable<Reservation> reservations = this.reservationRepository.findAll();
+        reservations.forEach(System.out::println);
     }
 }
