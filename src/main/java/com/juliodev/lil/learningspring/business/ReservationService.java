@@ -56,4 +56,23 @@ public class ReservationService {
         });
         return roomReservations;
     }
+
+    public List<GuestDTO> getAllGuests(){
+        Iterable<Guest> allGuestIterable = this.guestRepository.findAll();
+        List<GuestDTO> allGuestList = new ArrayList<>();
+        allGuestIterable.forEach((guest)->{
+            GuestDTO newGuestElement = new GuestDTO();
+            newGuestElement.setGuestId(guest.getGuestId());
+            newGuestElement.setFirstName(guest.getFirstName());
+            newGuestElement.setLastName(guest.getLastName());
+            newGuestElement.setEmailAddress(guest.getEmailAddress());
+            newGuestElement.setAddress(guest.getAddress());
+            newGuestElement.setCountry(guest.getCountry());
+            newGuestElement.setState(guest.getState());
+            newGuestElement.setPhoneNumber(guest.getPhoneNumber());
+
+            allGuestList.add(newGuestElement);
+        });
+        return allGuestList;
+    }
 }

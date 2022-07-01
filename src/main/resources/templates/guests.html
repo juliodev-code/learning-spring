@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Guest Page</title>
+</head>
+<body>
+    <h1>Welcome to the All Guest Page</h1>
+    <table>
+        <tr>
+            <td>LastName</td>
+            <td>FirstName</td>
+            <td>Email Address</td>
+            <td>Phone Number</td>
+        </tr>
+        <tr th:each="allGuestList: ${allGuestList}">
+            <td th:text="${allGuestList.lastName}">LastName</td>
+            <td th:text="${allGuestList.firstName}">FirstName</td>
+            <td th:text="${allGuestList.emailAddress}">Email Address</td>
+            <td th:text="${allGuestList.phoneNumber}">Phone Number</td>
+        </tr>
+    </table>
+</body>
+</html>
